@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+
+    <title>Incremental Game</title>
+  </head>
+  <body class="grey darken-4">
+    <!-- NavBar -->
+    <nav class="pink">
+      <div class="nav-wrapper container">
+        <span href="#" class="brand-logo">Basic Incremental</span>
+        <span href="#" class="brand-logo center">Total Cash: $<span id="total-money">0</span></span>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="#">Buy Amt: <span class="buy-amt">1</span></a></li>
+          <li><a href="#">Achievements</a></li>
+          <li><a href="#">Rewards</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Game Cards -->
+    <div class="container">
+      <div class="row">
+
+        <!-- Lemonade Stand -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align center-align">
+                <i class="far fa-lemon"></i> Lemonade Stand
+              </div>
+              <div>
+                <ul class="collection">
+                  <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                  <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                  <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                </ul>
+              </div>
+              <div class="progress">
+                  <div class="determinate pink" style="width: 0%"></div>
+              </div>
+              <div class="card-action">
+                <div>
+                  <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                  <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Candy Stand -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-candy-cane"></i> Candy Stand
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coffee Stand -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-mug-hot"></i> Coffee Stand
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Row -->
+      <div class="row">
+
+        <!-- Pizzria -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-pizza-slice"></i> Pizzria
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Store -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-chess"></i> Game Store
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pet Shoppe -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-fish"></i> Pet Shoppe
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Row -->
+      <div class="row">
+
+        <!-- Eye Glass Store -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-glasses"></i> Eye Glass Store
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Computer Store -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-laptop"></i> Computer Store
+              </div>
+              <div>
+                  <ul class="collection">
+                    <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                    <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                    <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                  </ul>
+                </div>
+                <div class="progress">
+                    <div class="determinate pink" style="width: 0%"></div>
+                </div>
+                <div class="card-action">
+                  <div>
+                    <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                    <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dragon Emporium -->
+        <div class="col l4 s12">
+          <div class="card grey darken-3">
+            <div class="card-content white-text">
+              <div class="card-title center-align">
+                <i class="fas fa-dragon"></i> Dragon Emporium
+            </div>
+            <div>
+                <ul class="collection">
+                  <li class="collection-item grey darken-1">Owned: <span class="owned">0</span></li>
+                  <li class="collection-item grey darken-1">Earnings: $<span class="earnings">1</span> every <span class="time">1 second</span></li>
+                  <li class="collection-item grey darken-1">Multiplier: <span class="multiplier">0</span></li>
+                </ul>
+              </div>
+              <div class="progress">
+                  <div class="determinate pink" style="width: 0%"></div>
+              </div>
+              <div class="card-action">
+                <div>
+                  <h6 class="center-align">Cost to buy <span class="multiples">1</span>: $<span class="cost">10</span></h6>
+                  <div class="center-align"><a class="btn">Buy <span class="multiples">1</span></a></div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
