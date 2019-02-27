@@ -10,7 +10,7 @@ class Business {
     this.timePercent = (this.timestampCurrent - this.timestampStart)/this.totalTime;
     this.multiplier = 1;
     this.earningsBase = parseFloat(earnings.toFixed(2));
-    this.earningsPer = parseFloat(earnings.toFixed(2));
+    this.earningsPer = 0;
   }
 
   /*
@@ -26,9 +26,9 @@ class Business {
   }
 
   buyBusiness(multiple) {
-    // if (first business ) {
-    //   setTimestamp();
-    // }
+    if (this.owned === 0) {
+      this.setTimestamp();
+    }
     if (this.currentCost <= totalCash) {
       this.owned += parseInt(multiple);
       totalCash -= this.currentCost;
@@ -40,16 +40,20 @@ class Business {
     this.earningsPer = parseFloat((this.earningsBase * this.owned * this.multiplier).toFixed(2));
   }
 
-  earn() {
-
+  earn(newTime) {
+    if (newTime - this.timestampStart >= this.totalTime){
+      totalCash += this.earningsPer;
+    }
   }
+
 
   increment() {
 
   }
 
   setTimestamp() {
-
+    let date = new Date();
+    this.timestampStart = date.getTime();
   }
 
 }
