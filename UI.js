@@ -22,9 +22,9 @@ class UI {
 
 
   updateOwned(businessIndex) {
+    console.log("ui owned", businessIndex);
     let bus = businesses[businessIndex];
     console.log(eval(bus).owned);
-    // console.log(`${bus}`[owned]);
 
     ownedSpans[businessIndex].innerText = eval(bus).owned;
   }
@@ -111,4 +111,5 @@ class UI {
   updateTime() {
 
   }
+  updateDisableButton () {}
 }

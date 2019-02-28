@@ -73,11 +73,13 @@ game.addEventListener("click", e => {
   if (e.target.className === "btn") {
     let businessIndex = buttons.indexOf(e.target);
     let bus = businesses[businessIndex];
-    eval(bus).buyBusiness(activeMultipier);
-    ui.updateOwned(businessIndex);
-    ui.updateEarnings(businessIndex);
-    console.log(cashOnScreen);
-    // ui.updateCash();
+    if (eval(bus).currentCost < totalCash) {
+      eval(bus).buyBusiness(activeMultipier);
+      ui.updateOwned(businessIndex);
+      ui.updateEarnings(businessIndex);
+      console.log(bus);
+      // ui.updateCash();
+    }
   }
 });
 
