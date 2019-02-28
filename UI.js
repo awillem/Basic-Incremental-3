@@ -5,15 +5,15 @@
 
 class UI {
   constructor() {
-    // this.lemonade = 0;
-    // this.candy = 1;
-    // this.coffee = 2;
-    // this.pizza = 3;
-    // this.game = 4;
-    // this.pet = 5;
-    // this.eye = 6;
-    // this.computer = 7;
-    // this.dragon = 8;
+    this.lemonade = true;
+    this.candy = true;
+    this.coffee = true;
+    this.pizza = true;
+    this.game = true;
+    this.pet = true;
+    this.eye = true;
+    this.computer = true;
+    this.dragon = true;
   }
 
   /*
@@ -50,7 +50,6 @@ class UI {
     e.target.parentElement.classList.add('active');
     activeMultipier = e.target.innerText;
     // TO DO - update buy cost
-    // TO DO - update buy button
     businessCostMultiplier.forEach(button => {
       if (activeMultipier === "max") {
         // add max business # in parens
@@ -64,8 +63,45 @@ class UI {
 
   }
 
-  updatePreloader() {
+  updatePreloader(businesses) {
+    businesses.forEach((bus, i) => {
+      let percent = eval(bus).timePercent * 100;
+      if (eval(bus).totalTime <= 2000){
+        if (percent > 65 ) {
+          percent = 100;
+        } else if (percent < 35) {
+          percent = 1;
+        }
+      } else if (eval(bus).totalTime <= 5000){
+        if (percent > 85 ) {
+          percent = 100;
+        } else if (percent < 15) {
+          percent = 1;
+        }
+      } else if (eval(bus).totalTime <= 25000){
+        if (percent > 95) {
+          percent = 100;
+        } else if (percent < 5) {
+          percent = 1;
+        }
+      }else if (eval(bus).totalTime <= 100000){
+        if (percent > 97) {
+          percent = 100;
+        } else if (percent < 3) {
+          percent = 1;
+        }
+      }/*else {*/
+      //   if (percent > 99) {
+      //     percent = 100;
+      //   } else if (percent < 1) {
+      //     percent = 0;
+      //   }
+      // }
+        preloaders[i].style.width = percent + '%';
+      
+    });
 
+    
   }
 
   updateCash() {
