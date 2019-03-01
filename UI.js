@@ -17,18 +17,16 @@ class UI {
   }
 
   /*
-  Possible Methods
+   Methods
   */
 
-
+// Called when business is purchased.  
   updateOwned(businessIndex) {
-    console.log("ui owned", businessIndex);
     let bus = businesses[businessIndex];
-    console.log(eval(bus).owned);
-
     ownedSpans[businessIndex].innerText = eval(bus).owned;
   }
 
+  // Called when business is purchased.  
   updateEarnings(businessIndex) {
     let bus = businesses[businessIndex];
     earningAmt[businessIndex].innerText = eval(bus).earningsPer;
@@ -49,7 +47,6 @@ class UI {
     });
     e.target.parentElement.classList.add('active');
     activeMultipier = e.target.innerText;
-    // TO DO - update buy cost
     businessCostMultiplier.forEach(button => {
       if (activeMultipier === "max") {
         // add max business # in parens
@@ -59,10 +56,35 @@ class UI {
     });
   }
 
-  updateCost() {
-
+  // Called when business is purchased or when Buy Amt multiplier changes. 
+  updateCost(multiplier, bus) {
+    if (multiplier !== 'max'){
+      let level = [1,10,25,100].indexOf(eval(multiplier));
+      businessCost.forEach((cost,index) => {
+        cost.innerText = eval(bus[index]).costs[level][0];
+      });
+    }
   }
 
+  // updateMax(businesses) {
+  //   businesses.forEach((bus, index) => {
+  //     eval(bus).calcMax();
+  //   });
+    
+  //   businessCost.forEach((cost,index) => {
+  //     console.log(businesses[index].maxCost[1]);
+  //     cost.innerText = eval(businesses[index]).maxCost[0];
+  //   });
+  //   buttons.forEach((button, index) => {
+  //     button.innerText = eval(businesses[index]).maxCost[1];
+  //   });
+  // }
+
+  /* 
+    updates the style.width of each preloader after the first business is bought. 
+    Was having issues with the preloaders never making it to 100%, and not getting down to 0% when it reset.
+    This method bumps up the percent to 100% or down to 1% depending on how close it is to finishing.  The longer the business timer runs, the less it needs to be adjusted.
+  */
   updatePreloader(businesses) {
     businesses.forEach((bus, i) => {
       let percent = eval(bus).timePercent * 100;
@@ -104,12 +126,21 @@ class UI {
     
   }
 
+  // Updates Total Cash.
   updateCash() {
-    cashOnScreen.innerText = totalCash;
+    cashOnScreen.innerText = parseFloat(totalCash.toFixed(2));
   }
 
-  updateTime() {
-
+  // For each business, looks to see if there is enough money to buy at the current
+  // multiplier level.  If not, it disables the button.
+  updateDisableButton () {
+    buttons.forEach((button, index) => {
+      if(businessCost[index].innerText > totalCash) {
+        button.classList.add('disabled');
+      } else {
+        button.classList.remove('disabled');
+      }
+      
+    });
   }
-  updateDisableButton () {}
 }
