@@ -58,12 +58,12 @@ class UI {
       });
     }
     e.target.parentElement.classList.add('active');
-    activeMultipier = e.target.innerText;
+    activeMultiplier = e.target.innerText;
     businessCostMultiplier.forEach(button => {
-      if (activeMultipier === "max") {
+      if (activeMultiplier === "max") {
         // add max business # in parens
       } else {
-        button.innerText = activeMultipier;
+        button.innerText = activeMultiplier;
       }
     });
   }

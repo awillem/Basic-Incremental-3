@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
     eyeGlass.calcCosts();  
     computer.calcCosts();  
     dragon.calcCosts();
-    ui.updateCost(activeMultipier,businesses);
+    ui.updateCost(activeMultiplier,businesses);
   } else { // otherwise get info from storage
     console.log("2");
       // get local storage, parseJSON, set game variables with response.
@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
         ui.updateOwned(index);
         ui.updateEarnings(index);
       });
-      ui.updateCost(activeMultipier,businesses);
+      ui.updateCost(activeMultiplier,businesses);
       requestAnimationFrame((timestamp) => {
         ui.setTimestamp(businesses);
         update(timestamp);
@@ -120,35 +120,42 @@ let buyMultipliersNav = Array.from(document.getElementById("nav").children);
 let buyMultipliersUlNav = document.getElementById("nav");
 let buyMultipliersNavMobile = Array.from(document.getElementById("nav-mobile").children);
 let buyMultipliersUlNavMobile = document.getElementById("nav-mobile");
-let activeMultipier;
+let activeMultiplier;
 if (window.innerWidth > 992 ){
-   activeMultipier = parseInt(buyMultipliersNav[1].innerText);
+   activeMultiplier = parseInt(buyMultipliersNav[1].innerText);
 } else {
-   activeMultipier = parseInt(buyMultipliersNavMobile[1].innerText);
+   activeMultiplier = parseInt(buyMultipliersNavMobile[1].innerText);
 }
+
 
 /*
   Event Listeners
 */
 
 // Updates buyMultiplierUl based on window size
-// window.addEventListener("resize", () => {
-//     changeNav();
-//     console.log(window.innerWidth, buyMultipliersUl.className);
-// });
+window.addEventListener("resize", () => {
+  let level = [1,10,25,100].indexOf(eval(activeMultiplier)) + 1;
+    // if (window.innerWidth > 992 ) {
+      console.log(buyMultipliersNav[level].innerText);
+      simulateClick(buyMultipliersNav[level]);
+    // } else {
+      console.log(buyMultipliersNavMobile[level].innerText);
+      simulateClick(buyMultipliersNavMobile[level]);
+    // }
+});
 
 // Listens for click on the Buy Amount.  
 //  Updates the target to be the activeMultiplier and updates costs for each business
 buyMultipliersUlNav.addEventListener("click", e => {
   // console.log(e.target.parentElement.parentElement);
   ui.updateBuyMultiplier(e);
-  ui.updateCost(activeMultipier, businesses);
+  ui.updateCost(activeMultiplier, businesses);
 });
 
 buyMultipliersUlNavMobile.addEventListener("click", e => {
   // console.log(e.target.parentElement.parentElement);
   ui.updateBuyMultiplier(e);
-  ui.updateCost(activeMultipier, businesses);
+  ui.updateCost(activeMultiplier, businesses);
 });
 
 // Listens for clicks on the "Buy buttons".  
@@ -158,10 +165,10 @@ game.addEventListener("click", e => {
   if (e.target.className === "btn") {
     let businessIndex = buttons.indexOf(e.target);
     let bus = businesses[businessIndex];
-      eval(bus).buyBusiness(activeMultipier);
+      eval(bus).buyBusiness(activeMultiplier);
       ui.updateOwned(businessIndex);
       ui.updateEarnings(businessIndex);
-      ui.updateCost(activeMultipier,businesses);
+      ui.updateCost(activeMultiplier,businesses);
   }
 });
 
@@ -177,7 +184,7 @@ function update(timestamp) {
   // incTimePercent();
   businessEarn(timestamp);
   // ui.updatePreloader();
-  // if (activeMultipier === 'max') {
+  // if (activeMultiplier === 'max') {
   //   ui.updateMax(businesses);
   // }
   requestAnimationFrame(update);
@@ -234,4 +241,14 @@ function changePreloader () {
       preloaders[i].className = 'indeterminate pink';
     }
   });
+}
+
+
+let simulateClick = function (elem) {
+  let evt = new MouseEvent ('click', {
+    bubbles: true,
+    cancelable: true,
+    view: window
+  });
+  let canceled = !elem.dispatchEvent(evt);
 }
