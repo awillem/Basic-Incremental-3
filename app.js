@@ -1,26 +1,71 @@
+ //initialize classes
+ const store = new LocalStorage();
+ const ui = new UI();
+ //cost, time, earnings
+ const lemonade = new Business(10, 5, 5.0);
+ const candy = new Business(100, 10, 50.0);
+ const coffee = new Business(1000, 25, 100.0);
+ const pizzaria = new Business(5000, 40, 250.0);
+ const gameStore = new Business(10000, 60, 500.0);
+ const pet = new Business(25000, 90, 1000.0);
+ const eyeGlass = new Business(100000, 120, 2500.0);
+ const computer = new Business(250000, 180, 15000.0);
+ const dragon = new Business(1000000, 240, 100000.0);
 
+window.addEventListener("load", () => {
+  
+  let test = JSON.parse(localStorage.getItem('lemonade')); 
+  if (window.localStorage.length === 0 || test.costs.length === 0){ // if no local storage, calc Costs
+    console.log("1");
+    lemonade.calcCosts();
+    candy.calcCosts();
+    coffee.calcCosts();  
+    pizzaria.calcCosts();  
+    gameStore.calcCosts();  
+    pet.calcCosts();  
+    eyeGlass.calcCosts();  
+    computer.calcCosts();  
+    dragon.calcCosts();
+    ui.updateCost(activeMultipier,businesses);
+  } else { // otherwise get info from storage
+    console.log("2");
+      // get local storage, parseJSON, set game variables with response.
+      store.getStore(businesses);
+      businesses.forEach( (bus,index) => {
+        ui.updateOwned(index);
+        ui.updateEarnings(index);
+      });
+      ui.updateCost(activeMultipier,businesses);
+      requestAnimationFrame((timestamp) => {
+        ui.setTimestamp(businesses);
+        update(timestamp);
+      }); 
+  }
+  
+   
+});
 
 // Initialize classes
-const ui = new UI();
-//cost, time, earnings
-const lemonade = new Business(10, 5, 5.0);
-lemonade.calcCosts();
-const candy = new Business(100, 10, 50.0);
-candy.calcCosts();
-const coffee = new Business(1000, 25, 100.0);
-coffee.calcCosts();
-const pizzaria = new Business(5000, 40, 250.0);
-pizzaria.calcCosts();
-const gameStore = new Business(10000, 60, 500.0);
-gameStore.calcCosts();
-const pet = new Business(25000, 90, 1000.0);
-pet.calcCosts();
-const eyeGlass = new Business(100000, 120, 2500.0);
-eyeGlass.calcCosts();
-const computer = new Business(250000, 180, 15000.0);
-computer.calcCosts();
-const dragon = new Business(1000000, 240, 100000.0);
-dragon.calcCosts();
+// const ui = new UI();
+// //cost, time, earnings
+// const lemonade = new Business(10, 5, 5.0);
+// lemonade.calcCosts();
+// const candy = new Business(100, 10, 50.0);
+// candy.calcCosts();
+// const coffee = new Business(1000, 25, 100.0);
+// coffee.calcCosts();
+// const pizzaria = new Business(5000, 40, 250.0);
+// pizzaria.calcCosts();
+// const gameStore = new Business(10000, 60, 500.0);
+// gameStore.calcCosts();
+// const pet = new Business(25000, 90, 1000.0);
+// pet.calcCosts();
+// const eyeGlass = new Business(100000, 120, 2500.0);
+// eyeGlass.calcCosts();
+// const computer = new Business(250000, 180, 15000.0);
+// computer.calcCosts();
+// const dragon = new Business(1000000, 240, 100000.0);
+// dragon.calcCosts();
 
 
 /*
@@ -39,11 +84,9 @@ const businesses = [
 ];
 let cashOnScreen = document.getElementById("total-money");
 let totalCash = parseFloat(document.querySelector("#total-money").innerText);
-const buyMultipliersUl = document.getElementById("nav-mobile");
-const buyMultipliers = Array.from(
-  document.getElementById("nav-mobile").children
-);
-let activeMultipier = parseInt(buyMultipliers[1].innerText);
+
+
+
 const game = document.getElementById("game-cards");
 const businessCards = Array.from(
   document.getElementsByClassName("card-content")
@@ -60,14 +103,50 @@ const businessCostMultiplier = Array.from(
 const businessCost = Array.from(document.getElementsByClassName("cost"));
 const buttons = Array.from(document.getElementsByClassName("btn"));
 const preloaders = Array.from(document.getElementsByClassName("determinate"));
+// let buyMultipliers;
+// let buyMultipliersUl;
+// function changeNav () {
+//   if (window.innerWidth > 992) {
+//     buyMultipliersUl = document.getElementById("nav");
+//     buyMultipliers = Array.from(document.getElementById("nav").children);
+//   } else if (window.innerWidth < 993) {
+//     buyMultipliersUl = document.getElementById("nav-mobile");
+//     buyMultipliers = Array.from(document.getElementById("nav").children);
+//   }
+// }
+// changeNav();
+
+let buyMultipliersNav = Array.from(document.getElementById("nav").children);
+let buyMultipliersUlNav = document.getElementById("nav");
+let buyMultipliersNavMobile = Array.from(document.getElementById("nav-mobile").children);
+let buyMultipliersUlNavMobile = document.getElementById("nav-mobile");
+let activeMultipier;
+if (window.innerWidth > 992 ){
+   activeMultipier = parseInt(buyMultipliersNav[1].innerText);
+} else {
+   activeMultipier = parseInt(buyMultipliersNavMobile[1].innerText);
+}
 
 /*
   Event Listeners
 */
 
+// Updates buyMultiplierUl based on window size
+// window.addEventListener("resize", () => {
+//     changeNav();
+//     console.log(window.innerWidth, buyMultipliersUl.className);
+// });
+
 // Listens for click on the Buy Amount.  
 //  Updates the target to be the activeMultiplier and updates costs for each business
-buyMultipliersUl.addEventListener("click", e => {
+buyMultipliersUlNav.addEventListener("click", e => {
+  // console.log(e.target.parentElement.parentElement);
+  ui.updateBuyMultiplier(e);
+  ui.updateCost(activeMultipier, businesses);
+});
+
+buyMultipliersUlNavMobile.addEventListener("click", e => {
+  // console.log(e.target.parentElement.parentElement);
   ui.updateBuyMultiplier(e);
   ui.updateCost(activeMultipier, businesses);
 });
@@ -95,7 +174,7 @@ game.addEventListener("click", e => {
 function update(timestamp) {
   ui.updateDisableButton();
   ui.updateCash();
-  incTimePercent();
+  // incTimePercent();
   businessEarn(timestamp);
   // ui.updatePreloader();
   // if (activeMultipier === 'max') {
@@ -104,16 +183,24 @@ function update(timestamp) {
   requestAnimationFrame(update);
 }
 
-requestAnimationFrame(update);
+requestAnimationFrame((timestamp) => {
+  update(timestamp);
+});
 
 // The preloaders did not run smoothly when called with requestAnimationFrame.
 // This set Interval updates the preloaders 20 times per second
 // The preloaders still need some work to run smoothly.
 
 setInterval(() => {
+  incTimePercent();
+
   ui.updatePreloader(businesses);
   changePreloader();
 }, 50);
+
+setInterval(() => {
+  store.setStore(businesses);
+}, 1000);
 
 
 /*

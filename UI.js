@@ -29,7 +29,11 @@ class UI {
   // Called when business is purchased.  
   updateEarnings(businessIndex) {
     let bus = businesses[businessIndex];
-    earningAmt[businessIndex].innerText = eval(bus).earningsPer;
+    if (eval(bus).earningsPer === 0){
+      earningAmt[businessIndex].innerText = eval(bus).earningsBase;
+    } else {
+      earningAmt[businessIndex].innerText = eval(bus).earningsPer;
+    }
   }
 
 /* 
@@ -40,11 +44,19 @@ class UI {
 */
 
   updateBuyMultiplier(e) {
-    buyMultipliers.forEach((multiplier, index) => {
-      if(index !== 0) {
-        multiplier.classList.remove('active');
-      }
-    });
+    if (window.innerWidth > 992){
+      buyMultipliersNav.forEach((multiplier, index) => {
+        if(index !== 0) {
+          multiplier.classList.remove('active');
+        }
+      });
+    } else {
+      buyMultipliersNavMobile.forEach((multiplier, index) => {
+        if(index !== 0) {
+          multiplier.classList.remove('active');
+        }
+      });
+    }
     e.target.parentElement.classList.add('active');
     activeMultipier = e.target.innerText;
     businessCostMultiplier.forEach(button => {
@@ -141,6 +153,15 @@ class UI {
         button.classList.remove('disabled');
       }
       
+    });
+  }
+
+  // Used to set times when information is retrieved from localStorage
+  setTimestamp (businesses) {
+    businesses.forEach( bus => {
+      if (eval(bus).owned > 0){
+        eval(bus).setTimestamp();
+        }
     });
   }
 }
