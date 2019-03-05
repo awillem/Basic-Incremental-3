@@ -1,4 +1,6 @@
- //initialize classes
+
+
+//initialize classes
  const store = new LocalStorage();
  const ui = new UI();
  //cost, time, earnings
@@ -16,7 +18,6 @@ window.addEventListener("load", () => {
   
   let test = JSON.parse(localStorage.getItem('lemonade')); 
   if (window.localStorage.length === 0 || test.costs.length === 0){ // if no local storage, calc Costs
-    console.log("1");
     lemonade.calcCosts();
     candy.calcCosts();
     coffee.calcCosts();  
@@ -28,7 +29,6 @@ window.addEventListener("load", () => {
     dragon.calcCosts();
     ui.updateCost(activeMultiplier,businesses);
   } else { // otherwise get info from storage
-    console.log("2");
       // get local storage, parseJSON, set game variables with response.
       store.getStore(businesses);
       businesses.forEach( (bus,index) => {
@@ -40,6 +40,7 @@ window.addEventListener("load", () => {
         ui.setTimestamp(businesses);
         update(timestamp);
       }); 
+      store.createEarnings(businesses);
   }
   
    
@@ -136,10 +137,8 @@ if (window.innerWidth > 992 ){
 window.addEventListener("resize", () => {
   let level = [1,10,25,100].indexOf(eval(activeMultiplier)) + 1;
     // if (window.innerWidth > 992 ) {
-      console.log(buyMultipliersNav[level].innerText);
       simulateClick(buyMultipliersNav[level]);
     // } else {
-      console.log(buyMultipliersNavMobile[level].innerText);
       simulateClick(buyMultipliersNavMobile[level]);
     // }
 });
