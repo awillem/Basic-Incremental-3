@@ -102,7 +102,7 @@ const businessCostMultiplier = Array.from(
   document.getElementsByClassName("multiples")
 );
 const businessCost = Array.from(document.getElementsByClassName("cost"));
-const buttons = Array.from(document.getElementsByClassName("btn"));
+const buttons = Array.from(document.getElementsByClassName("buttons"));
 const preloaders = Array.from(document.getElementsByClassName("determinate"));
 // let buyMultipliers;
 // let buyMultipliersUl;
@@ -161,13 +161,22 @@ buyMultipliersUlNavMobile.addEventListener("click", e => {
 // Calls the business's buyBusiness method
 // updates the Owned, Earnings, and Cost for that business
 game.addEventListener("click", e => {
-  if (e.target.className === "btn") {
+  if (e.target.className === "btn buttons") {
     let businessIndex = buttons.indexOf(e.target);
     let bus = businesses[businessIndex];
       eval(bus).buyBusiness(activeMultiplier);
       ui.updateOwned(businessIndex);
       ui.updateEarnings(businessIndex);
       ui.updateCost(activeMultiplier,businesses);
+  }
+});
+
+document.getElementById('reset').addEventListener('click', e => {
+  let result = confirm("This will reset the entire game.  Are you certain you want to do this?");
+  if (result) {
+    clearInterval(storeID);
+    store.clearStorage();
+    location.reload();
   }
 });
 
@@ -203,10 +212,13 @@ setInterval(() => {
   ui.updatePreloader(businesses);
   changePreloader();
 }, 50);
+let i = 0;
 
-setInterval(() => {
+var storeID = setInterval(() => {
+  i++;
   store.setStore(businesses);
-}, 1000);
+  console.log('saved', i);
+}, 5000);
 
 
 /*

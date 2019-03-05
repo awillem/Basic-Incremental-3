@@ -126,11 +126,9 @@ class Business {
       this.owned += parseInt(multiple);
       totalCash -= this.costs[level][0];
       this.setEarnings();
-      console.log("ugh",this.costs[level][1]);
       // this.currentCost = this.changeCurrentCost(level);
       this.currentCost = this.costs[level][1];
       this.calcCosts();
-      console.log('newcurrent',this.currentCost);
     // }
   }
 
