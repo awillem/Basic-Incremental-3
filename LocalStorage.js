@@ -49,4 +49,8 @@ class LocalStorage {
         alert(`You earned ${earnings} while you were away!`);
       }
     }
+
+    clearStorage() {
+      localStorage.clear();
+    }
 }
