@@ -45,8 +45,10 @@ class LocalStorage {
       if (earnings > 0) {
         totalCash += earnings;
         ui.updateCash();
-        console.log(earnings);
-        alert(`You earned ${earnings} while you were away!`);
+        setTimeout(() => {
+          alert(`You earned ${earnings} while you were away!`);
+        }, 500);
+        
       }
     }
 

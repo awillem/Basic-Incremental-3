@@ -1,10 +1,11 @@
 class Business {
-  constructor(cost, time, earnings) {
+  constructor(cost, time, earnings, costInc) {
     this.owned = 0;
     // this.startingCost = cost;
     this.currentCost = cost;
     this.costs = [];
     this.maxCost = [];
+    this.costInc = costInc;
     this.totalTime = time * 1000;
     this.timestampStart;
     this.timestampCurrent;
@@ -36,15 +37,17 @@ class Business {
       if (this.owned === 0 && buyingNum === 1)  {
         levels.push(current);
       } else {
-        if (buyingNum > 1 && buyingNum < 26) {
-          current = parseFloat((current * 1.04).toFixed(2));
-        } else if (buyingNum > 25 && buyingNum < 51) {
-          current = parseFloat((current *1.045).toFixed(2));
-        } else if (buyingNum > 50 && buyingNum < 101 ) {
-          current = parseFloat((current * 1.05).toFixed(2));
-        } else {
-          current  = parseFloat((current * 1.06).toFixed(2));
-        }
+        // if (buyingNum > 1 && buyingNum < 26) {
+        //   current = parseFloat((current * 1.04).toFixed(2));
+        // } else if (buyingNum > 25 && buyingNum < 51) {
+        //   current = parseFloat((current *1.045).toFixed(2));
+        // } else if (buyingNum > 50 && buyingNum < 101 ) {
+        //   current = parseFloat((current * 1.05).toFixed(2));
+        // } else {
+        //   current  = parseFloat((current * 1.06).toFixed(2));
+        // }
+        current = parseFloat((current * this.costInc).toFixed(2));
+        
         levels.push(current);
       }
     } while (levels.length < 100);

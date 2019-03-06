@@ -3,16 +3,17 @@
 //initialize classes
  const store = new LocalStorage();
  const ui = new UI();
- //cost, time, earnings
- const lemonade = new Business(10, 5, 5.0);
- const candy = new Business(100, 10, 50.0);
- const coffee = new Business(1000, 25, 100.0);
- const pizzaria = new Business(5000, 40, 250.0);
- const gameStore = new Business(10000, 60, 500.0);
- const pet = new Business(25000, 90, 1000.0);
- const eyeGlass = new Business(100000, 120, 2500.0);
- const computer = new Business(250000, 180, 15000.0);
- const dragon = new Business(1000000, 240, 100000.0);
+ //cost, time, earnings, costInc
+ const lemonade = new Business(5, 2, 1.0, 1.07);
+ const candy = new Business(65, 3, 65.0, 1.15);
+ const coffee = new Business(748, 3, 585.0, 1.14);
+ const pizzaria = new Business(8602, 14, 5265.0, 1.13);
+ const gameStore = new Business(98923, 29, 60548.0, 1.12);
+ const pet = new Business(1137615, 99, 696302.0, 1.11);
+ const eyeGlass = new Business(13082573, 400, 8007473.0, 1.10);
+ const computer = new Business(150449590, 1500, 92085940.0, 1.09);
+ const dragon = new Business(1730170285, 6300, 1058988310.0, 1.08);
+ const final = new Business(21627128562, 35000, 28063190215, 1.07);
 
 window.addEventListener("load", () => {
   
@@ -27,6 +28,7 @@ window.addEventListener("load", () => {
     eyeGlass.calcCosts();  
     computer.calcCosts();  
     dragon.calcCosts();
+    final.calcCosts();
     ui.updateCost(activeMultiplier,businesses);
   } else { // otherwise get info from storage
       // get local storage, parseJSON, set game variables with response.
@@ -81,7 +83,8 @@ const businesses = [
   "pet",
   "eyeGlass",
   "computer",
-  "dragon"
+  "dragon",
+  "final"
 ];
 let cashOnScreen = document.getElementById("total-money");
 let totalCash = parseFloat(document.querySelector("#total-money").innerText);
@@ -217,7 +220,6 @@ let i = 0;
 var storeID = setInterval(() => {
   i++;
   store.setStore(businesses);
-  console.log('saved', i);
 }, 5000);
 
 
