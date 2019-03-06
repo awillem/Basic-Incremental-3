@@ -14,6 +14,7 @@ class UI {
     this.eye = true;
     this.computer = true;
     this.dragon = true;
+    this.final = true;
   }
 
   /*
@@ -70,6 +71,7 @@ class UI {
 
   // Called when business is purchased or when Buy Amt multiplier changes. 
   updateCost(multiplier, bus) {
+    
     if (multiplier !== 'max'){
       let level = [1,10,25,100].indexOf(eval(multiplier));
       businessCost.forEach((cost,index) => {
