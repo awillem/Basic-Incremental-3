@@ -16,6 +16,8 @@
  const final = new Business(21627128562, 35000, 28063190215, 1.07);
 
 window.addEventListener("load", () => {
+  let time = JSON.parse(localStorage.getItem('time'));
+  pleaseReset(time);
   
   let test = JSON.parse(localStorage.getItem('lemonade')); 
   if (window.localStorage.length === 0 || test.costs.length === 0){ // if no local storage, calc Costs
@@ -264,4 +266,16 @@ let simulateClick = function (elem) {
     view: window
   });
   let canceled = !elem.dispatchEvent(evt);
+}
+
+
+function pleaseReset(time) {
+  const resetTime = 1551849341983;
+  let lastTime = time
+  if (lastTime > resetTime || lastTime === null) {
+    
+  } else {
+    alert("Game has been updated.  Recommend a complete Reset.  Reset button can be found at the bottom of the page. ")
+  }
+
 }
