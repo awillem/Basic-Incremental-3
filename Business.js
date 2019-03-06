@@ -71,7 +71,7 @@ class Business {
     b = parseFloat(b.toFixed(2));
     c = parseFloat(c.toFixed(2));
     d = parseFloat(d.toFixed(2));
-    this.costs.push([a, levels[0]],[b, levels[1]],[c, levels[2]],[d, levels[3]]);
+    this.costs.push([a, levels[0]],[b, levels[9]],[c, levels[24]],[d, levels[99]]);
     // console.log(this.costs);
   }
 
