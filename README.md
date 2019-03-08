@@ -5,7 +5,7 @@ This will be a basic incremental type game.  Previously started and got some fun
 [Basic Incremental Game](https://awillem.github.io/Basic-Incremental-3/)
 
 ## Where to Discuss
-Want to discuss the game and the upcoming changes, or make suggestion.  Come check out the [Discord](https://discord.gg/5dE5Up)
+Want to discuss the game and the upcoming changes, or make suggestion.  Come check out the [Discord](https://discord.gg/BKjj9kC)
 
 ## Tech/framework used
 **Built with:**
