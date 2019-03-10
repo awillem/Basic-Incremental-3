@@ -27,6 +27,7 @@ class LocalStorage {
         eval(bus).multiplier = data.multiplier;
         eval(bus).earningsBase = data.earningsBase;
         eval(bus).earningsPer = data.earningsPer;
+        eval(bus).milestone = data.milestone;
       });
     }
 

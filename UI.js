@@ -37,6 +37,19 @@ class UI {
     }
   }
 
+  // milestones percentage
+  updateMilestone (bus, businessIndex) {
+    if (eval(bus).owned > 0 && businessMilestones[businessIndex].className.includes('grey')) {
+      businessMilestones[businessIndex].className = "collection-item milestone";
+    }
+    let completed = eval(bus).milestonePercent;
+    let left = 100 - completed;
+    let gradient = `linear-gradient(90deg, #ec407a ${completed}%, #757575 ${left}% )`
+    // console.log( gradient);
+    // console.log(businessIndex);
+    businessMilestones[businessIndex].style.backgroundImage = gradient;
+  }
+
 /* 
   Updates the buy multipliers (1, 10, 25, 100, max)
   called when a player clicks on a new multiplier.
@@ -166,4 +179,6 @@ class UI {
         }
     });
   }
+
+  
 }

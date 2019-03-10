@@ -1,5 +1,5 @@
 class Business {
-  constructor(cost, time, earnings, costInc) {
+  constructor(cost, time, earnings, costInc, milestone) {
     this.owned = 0;
     // this.startingCost = cost;
     this.currentCost = cost;
@@ -14,12 +14,16 @@ class Business {
     this.multiplier = 1;
     this.earningsBase = parseFloat(earnings.toFixed(2));
     this.earningsPer = 0;
+    this.milestones = milestone;
+    this.milestonePercent = 0;
+    this.lastMilestone = 0;
   }
 
   /*
    Methods
   */
 
+ 
   /* 
     In an incremental game, the cost for each successive buy increases.  
     This method takes in the cost to buy the last purchased and then multiplies 
@@ -120,7 +124,7 @@ class Business {
     If this the first purchase of this business, a timestamp is set, which is then reset each time an earnings cycle completes.
     It increases owned by the multiplier number.  Subtracts the cost from totalCash.  Updates the earnings amount.  Sets currentCost to the cost of the highest purchased business.  and then recalcs costs. 
   */
-  buyBusiness(multiple) {
+  buyBusiness(multiple, business, businesses) {
     let level = [1,10,25,100].indexOf(eval(multiple));
     if (this.owned === 0) {
       this.setTimestamp();
@@ -128,6 +132,7 @@ class Business {
     // if (this.costs[level][0] <= totalCash) {
       this.owned += parseInt(multiple);
       totalCash -= this.costs[level][0];
+      this.checkMilestones();
       this.setEarnings();
       // this.currentCost = this.changeCurrentCost(level);
       this.currentCost = this.costs[level][1];
@@ -164,4 +169,40 @@ class Business {
   setTimestamp() {
     this.timestampStart = performance.now();
   }
+
+  checkMilestones() {
+    let miles = Array.from(this.milestones);
+    let lastMile = this.lastMilestone;
+    let nextMile;
+    for (let mile of miles) {
+      if (mile[0] <= this.owned){ // checks that the milestone is below owned
+        if (mile[1] === false){ // checks if multiplier has already been set
+          switch (mile[3]) {
+            case "time":
+              this.totalTime = this.totalTime * mile[4];
+              mile[1] = true;
+              lastMile = mile[0];
+            break;
+            case "multiplier":
+              if (this.multiplier === 1) {
+                this.multiplier = mile[4];
+                mile[1] = true;
+                lastMile = mile[0];
+              } else {
+                this.multiplier += mile[4];
+                mile[1] = true;
+                lastMile = mile[0];
+              }
+            break;
+          }
+        }
+      } else { // for the first milestone that is above owned, sets it as nextMile and breaks the loops.
+        nextMile = mile[0];
+        break
+      }
+    }
+    this.lastMilestone = lastMile;
+    this.milestonePercent = ((this.owned - lastMile)/(nextMile-lastMile)) * 100;
+    
+  } //closes check Multiplier
 }

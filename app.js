@@ -1,19 +1,18 @@
 
-
 //initialize classes
  const store = new LocalStorage();
  const ui = new UI();
- //cost, time, earnings, costInc
- const lemonade = new Business(5, 2, 1.0, 1.07);
- const candy = new Business(65, 3, 65.0, 1.15);
- const coffee = new Business(748, 3, 585.0, 1.14);
- const pizzaria = new Business(8602, 14, 5265.0, 1.13);
- const gameStore = new Business(98923, 29, 60548.0, 1.12);
- const pet = new Business(1137615, 99, 696302.0, 1.11);
- const eyeGlass = new Business(13082573, 400, 8007473.0, 1.10);
- const computer = new Business(150449590, 1500, 92085940.0, 1.09);
- const dragon = new Business(1730170285, 6300, 1058988310.0, 1.08);
- const final = new Business(21627128562, 35000, 28063190215, 1.07);
+ //cost, time, earnings, costInc, milestone
+ const lemonade = new Business(5, 2, 1.0, 1.07, milestone.lemonade);
+ const candy = new Business(65, 3, 65.0, 1.15, milestone.candy);
+ const coffee = new Business(748, 3, 585.0, 1.14, milestone.coffee);
+ const pizzaria = new Business(8602, 14, 5265.0, 1.13, milestone.pizzaria);
+ const gameStore = new Business(98923, 29, 60548.0, 1.12, milestone.gameStore);
+ const pet = new Business(1137615, 99, 696302.0, 1.11, milestone.pet);
+ const eyeGlass = new Business(13082573, 400, 8007473.0, 1.10, milestone.eyeGlass);
+ const computer = new Business(150449590, 1500, 92085940.0, 1.09, milestone.computer);
+ const dragon = new Business(1730170285, 6300, 1058988310.0, 1.08, milestone.dragon);
+ const final = new Business(21627128562, 35000, 28063190215, 1.07, milestone.final);
 
 window.addEventListener("load", () => {
   let time = JSON.parse(localStorage.getItem('time'));
@@ -100,12 +99,14 @@ const businessCards = Array.from(
 const ownedSpans = Array.from(document.getElementsByClassName("owned"));
 const earningAmt = Array.from(document.getElementsByClassName("earnings"));
 const earningTime = Array.from(document.getElementsByClassName("time"));
-const businessMultiplier = Array.from(
-  document.getElementsByClassName("multiplier")
+const businessMilestones = Array.from(
+  document.getElementsByClassName("milestone")
 );
 const businessCostMultiplier = Array.from(
   document.getElementsByClassName("multiples")
 );
+console.log(businessMilestones);
+console.log(businessCostMultiplier);
 const businessCost = Array.from(document.getElementsByClassName("cost"));
 const buttons = Array.from(document.getElementsByClassName("buttons"));
 const preloaders = Array.from(document.getElementsByClassName("determinate"));
@@ -173,6 +174,8 @@ game.addEventListener("click", e => {
       ui.updateOwned(businessIndex);
       ui.updateEarnings(businessIndex);
       ui.updateCost(activeMultiplier,businesses);
+      ui.updateMilestone(bus, businessIndex);
+      // eval(bus).checkMilestones(bus, businesses);
   }
 });
 
@@ -211,12 +214,12 @@ requestAnimationFrame((timestamp) => {
 // This set Interval updates the preloaders 20 times per second
 // The preloaders still need some work to run smoothly.
 
-setInterval(() => {
-  incTimePercent();
+// setInterval(() => {
+//   incTimePercent();
 
-  ui.updatePreloader(businesses);
-  changePreloader();
-}, 50);
+//   ui.updatePreloader(businesses);
+//   changePreloader();
+// }, 75);
 let i = 0;
 
 var storeID = setInterval(() => {
