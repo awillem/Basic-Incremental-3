@@ -21,7 +21,7 @@ I have a lot of features or tweaks I would like to add to this game.
 
 + *First round of balancing is done.  We'll see how it goes.* Balance out the earning and costs.  Right now, there are points where you make more money from a smaller business compared to a bigger business with the same amount owned.
 + Add a *Max Buy* option to the buy multiplier.
-+ Add a milestone system that gives either time or multiplier bonus.  Example.  Lemonade reaches 25 owned, it reaches first milestone and now takes half the time to collect earnings.  (2.5 seconds vs 5 seconds).  At 50 owned, it gets a 2x multiplier.  
++ *Currently working on* Add a milestone system that gives either time or multiplier bonus.  Example.  Lemonade reaches 25 owned, it reaches first milestone and now takes half the time to collect earnings.  (2.5 seconds vs 5 seconds).  At 50 owned, it gets a 2x multiplier.  
 + Adding a prestige system.  This would reset the game, but you would get prestige points, each of which gives a 5% bonus. 
 + Adding a stats page. Total Net Worth, total resets, etc.
 + Add a manager system
